@@ -1,0 +1,43 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateHotel($filter: ModelSubscriptionHotelFilterInput) {
+  onCreateHotel(filter: $filter) {
+    id
+    name
+    address_line_1
+    address_line_2
+    city
+    zipcode
+    country
+    image_link
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateHotel($filter: ModelSubscriptionHotelFilterInput) {
+  onUpdateHotel(filter: $filter) {
+    id
+    name
+    address_line_1
+    address_line_2
+    city
+    zipcode
+    country
+    image_link
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteHotel($filter: ModelSubscriptionHotelFilterInput) {
+  onDeleteHotel(filter: $filter) {
+    id
+    name
+    address_line_1
+    address_line_2
+    city
+    zipcode
+    country
+    image_link
+    createdAt
+    updatedAt
+  }
+}

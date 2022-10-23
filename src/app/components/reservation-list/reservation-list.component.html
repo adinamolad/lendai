@@ -1,0 +1,34 @@
+<h1>Reservations List</h1>
+<button mat-raised-button color="primary" (click)="onAddClick()">Add Reservation</button>
+
+<table mat-table [dataSource]="reservations" class="" *ngIf="this.reservations">
+
+    <ng-container matColumnDef="check_in_date">
+      <th mat-header-cell *matHeaderCellDef> check_in_date </th>
+      <td mat-cell *matCellDef="let reservation"> {{reservation.check_in_date}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="check_out_date">
+      <th mat-header-cell *matHeaderCellDef> check_out_date </th>
+      <td mat-cell *matCellDef="let reservation"> {{reservation.check_out_date}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="client">
+      <th mat-header-cell *matHeaderCellDef> client </th>
+      <td mat-cell *matCellDef="let reservation"> {{reservation.Client.first_name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="hotel">
+      <th mat-header-cell *matHeaderCellDef> hotel </th>
+      <td mat-cell *matCellDef="let reservation"> {{reservation.Hotel.hotel_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="room_type">
+      <th mat-header-cell *matHeaderCellDef> room_type </th>
+      <td mat-cell *matCellDef="let reservation"> {{reservation.RoomType.room_type_name}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  

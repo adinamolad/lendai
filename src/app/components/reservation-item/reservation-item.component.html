@@ -1,0 +1,64 @@
+<h1>Reservation Item</h1>
+
+<form [formGroup]="reservationForm" *ngIf="reservationForm">
+    <div class="my-grid">
+     
+        <mat-form-field appearance="fill">
+            <mat-label>Client</mat-label>
+            <mat-select formControlName="client" (selectionChange)="checkDates()" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let client of clients; let i=index" [value]="client?.id">
+                    {{client?.first_name}} {{client?.last_name}}
+                </mat-option>
+            </mat-select>
+            
+        </mat-form-field>
+       
+        <mat-form-field appearance="fill">
+            <mat-label>Hotel</mat-label>
+            <mat-select formControlName="hotel" (selectionChange)="getRoomTypes()"  required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let hotel of hotels" [value]="hotel?.id">
+                    {{hotel.hotel_name}}
+                </mat-option>
+            </mat-select>
+           
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>room_type</mat-label>
+            <mat-select formControlName="room_type" (selectionChange)="checkRoomTypes()"  required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let room_type of roomTypes" [value]="room_type?.id">
+                    {{room_type.room_type_name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="reservationForm.get('room_type')?.hasError('full')">A client cannot book a room of a specific type because all the rooms are already booked</mat-error>
+            
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input formGroupName="range" [rangePicker]="rangePicker">
+                <input matStartDate formControlName="check_in_date" placeholder="check_in_date">
+                <input matEndDate formControlName="check_out_date" placeholder="check_out_date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+            <mat-error *ngIf="range.get('check_in_date')?.hasError('intersects')">A client can't book two rooms on the same date</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker>
+                <mat-date-range-picker-actions>
+                    <button mat-button matDateRangePickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" (click)="checkDates()" matDatepickerApply>Apply</button>
+                </mat-date-range-picker-actions>
+            </mat-date-range-picker>     
+        </mat-form-field>
+   
+        
+
+
+    </div>
+
+</form>
+
+<button mat-raised-button color="primary" (click)="onSubmitClick()">Submit</button>

@@ -1,0 +1,36 @@
+type Client @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  first_name: String
+  last_name: String
+}
+
+type Reservation @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  check_in_date: AWSDate
+  check_out_date: AWSDate
+  Client: Client @hasOne
+  Hotel: Hotel @hasOne
+  RoomType: RoomType @hasOne
+}
+
+type RoomType @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  room_type_name: String
+  quantity: Int
+  hotelID: ID! @index(name: "byHotel")
+}
+
+type Hotel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  hotel_name: String
+  address_line_1: String
+  address_line_2: String
+  city: String
+  zipcode: String
+  country: String
+  image_link: AWSURL
+  RoomTypes: [RoomType] @hasMany(indexName: "byHotel", fields: ["id"])
+  lat: Float
+  long: Float
+}
+ 

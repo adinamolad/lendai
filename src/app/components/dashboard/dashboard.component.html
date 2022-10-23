@@ -1,0 +1,23 @@
+<h1>Dashboard</h1>
+<div class="my-grid">
+    <div>
+        <h2># of Reservations Created Each Day</h2>
+        <div class="my-grid">
+            <ng-container *ngFor="let reservation of reservations">
+                <div>{{ reservation.date | date:'d.M.yyyy' }}</div>
+                <div>{{ reservation.count }}</div>
+            </ng-container>
+        </div>
+
+    </div>
+
+    <div>
+        <h2>Top 5 Hotels</h2>
+        <div class="my-grid">
+            <ng-container *ngFor="let hotel of hotels">
+                <div>{{ hotel.hotel }}</div>
+                <div>{{ hotel.count }}</div>
+            </ng-container>
+        </div>
+    </div>
+</div>

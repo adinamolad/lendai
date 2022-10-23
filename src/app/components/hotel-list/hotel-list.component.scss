@@ -1,0 +1,10 @@
+.wrapper {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 300px);
+
+  }
+
+  .example-card {
+    max-width: 300px;
+  }

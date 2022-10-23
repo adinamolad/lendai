@@ -1,0 +1,25 @@
+<h1>Hotels List</h1>
+<button mat-raised-button color="primary" (click)="onAddClick()">Add Hotel</button>
+
+<div class="wrapper">
+  <ng-container *ngFor="let hotel of hotels">
+    <!-- <div><img src="{{ hotel?.image_link }}" /></div>
+    <div><a routerLink="/hotel-item/{{hotel?.id}}">{{ hotel?.hotel_name }}</a></div> -->
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title><a routerLink="/hotel-item/{{hotel?.id}}">{{ hotel?.hotel_name }}</a></mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{ hotel?.image_link }}" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          {{hotel?.address_line_1}}<br>
+          {{hotel?.address_line_2}}<br>
+          {{hotel?.city}}<br>
+          {{hotel?.zipcode}}<br>
+          {{hotel?.country}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>
