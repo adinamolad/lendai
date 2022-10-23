@@ -163,23 +163,34 @@ export class ReservationItemComponent implements OnInit, OnDestroy {
 
 
   async onSubmitClick() {
-    if (!this.range.get('check_in_date')?.hasError('intersect')) {
-      await DataStore.save(
-        new Reservation({
-          check_in_date: this.reservationForm.value.check_in_date,//doesnt work...
-          check_out_date: this.reservationForm.value.check_in_date,//doesnt work...
-          reservationHotelId: this.reservationForm.value.hotel,
-          reservationClientId: this.reservationForm.value.client,
-          reservationRoomTypeId: this.reservationForm.value.room_type
 
-        })
-      );
+    if (!this.reservationForm.valid) {
 
-      this._snackBar.open('A new reservation was saved', 'Done', {
+      this._snackBar.open('Form not valid', 'Error', {
         duration: 3000
       });
 
-      this.goToReservationList();
+
+    } else {
+
+      if (!this.range.get('check_in_date')?.hasError('intersect')) {
+        await DataStore.save(
+          new Reservation({
+            check_in_date: this.reservationForm.value.check_in_date,//doesnt work...
+            check_out_date: this.reservationForm.value.check_in_date,//doesnt work...
+            reservationHotelId: this.reservationForm.value.hotel,
+            reservationClientId: this.reservationForm.value.client,
+            reservationRoomTypeId: this.reservationForm.value.room_type
+
+          })
+        );
+
+        this._snackBar.open('A new reservation was saved', 'Done', {
+          duration: 3000
+        });
+
+        this.goToReservationList();
+      }
     }
 
   }

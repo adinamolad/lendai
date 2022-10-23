@@ -125,25 +125,36 @@ export class HotelItemComponent implements OnInit {
 
   async onSubmitClick() {
 
-    await DataStore.save(
-      new Hotel({
-        hotel_name: this.hotelForm.value.hotel_name,
-        address_line_1: this.hotelForm.value.address_line_1,
-        address_line_2: this.hotelForm.value.address_line_2,
-        city: this.hotelForm.value.city,
-        zipcode: this.hotelForm.value.zipcode,
-        country: this.hotelForm.value.country,
-        image_link: this.hotelForm.value.image_link,
-        lat: Number(this.hotelForm.value.lat),
-        long: Number(this.hotelForm.value.long),
-      })
-    );
+    //I did not take care of url validation
+    if (!this.hotelForm.valid) {
+      
+      this._snackBar.open('Form not valid', 'Error', {
+        duration: 3000
+      });
 
-    this._snackBar.open('A hotel ' + this.hotelForm.value.hotel_name + ' was saved', 'Done', {
-      duration: 3000
-    });
 
-    this.goToHotelList();
+    } else {
+
+      await DataStore.save(
+        new Hotel({
+          hotel_name: this.hotelForm.value.hotel_name,
+          address_line_1: this.hotelForm.value.address_line_1,
+          address_line_2: this.hotelForm.value.address_line_2,
+          city: this.hotelForm.value.city,
+          zipcode: this.hotelForm.value.zipcode,
+          country: this.hotelForm.value.country,
+          image_link: this.hotelForm.value.image_link,
+          lat: Number(this.hotelForm.value.lat),
+          long: Number(this.hotelForm.value.long),
+        })
+      );
+
+      this._snackBar.open('A hotel ' + this.hotelForm.value.hotel_name + ' was saved', 'Done', {
+        duration: 3000
+      });
+
+      this.goToHotelList();
+    }
 
   }
 
@@ -151,5 +162,5 @@ export class HotelItemComponent implements OnInit {
   goToHotelList() {
     this.router.navigate(['hotel-list']);
   }
-  
+
 }

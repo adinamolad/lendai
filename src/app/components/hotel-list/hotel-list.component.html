@@ -1,5 +1,14 @@
 <h1>Hotels List</h1>
-<button mat-raised-button color="primary" (click)="onAddClick()">Add Hotel</button>
+<div>
+  <mat-form-field class="example-search">
+    <input type="text" matInput placeholder="Search" name="search" (keyup.enter)="onSearch($event)">
+    <mat-hint>Case Sensitive....</mat-hint>
+  </mat-form-field>
+</div>
+
+<div class="example-search">
+  <button mat-raised-button color="primary" (click)="onAddClick()">Add Hotel</button>
+</div>
 
 <div class="wrapper">
   <ng-container *ngFor="let hotel of hotels">

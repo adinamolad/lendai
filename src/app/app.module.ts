@@ -24,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatCardModule } from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -56,6 +57,7 @@ import { MatCardModule } from '@angular/material/card';
     MatNativeDateModule,
     MatSnackBarModule,
     MatCardModule,
+    MatIconModule,
     GoogleMapsModule
   ],
   providers: [],

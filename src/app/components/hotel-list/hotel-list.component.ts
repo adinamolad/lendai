@@ -16,15 +16,16 @@ export class HotelListComponent implements OnInit, OnDestroy {
   public hotels: Array<Hotel> = [];
 
   constructor(private router: Router) {
-    
+
   }
 
-   ngOnInit() {
+  ngOnInit() {
     //Subscribe to changes
     this.subscription = DataStore.observe<Hotel>(Hotel).subscribe((msg) => {
       console.log(msg.model, msg.opType, msg.element);
     });
-    
+
+
     this.loadHotelList();
   }
 
@@ -33,14 +34,22 @@ export class HotelListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onAddClick(){
+  onSearch(event: any) {
+    console.log(event.target.value);
+    this.searchHotelList(event.target.value);
+  }
+
+  onAddClick() {
     this.router.navigate(['hotel-item', 'new']);
   }
 
   public async loadHotelList() {
     this.hotels = await DataStore.query(Hotel);
-    //this.hotels = await DataStore.query(Hotel, (h) => h.hotel_name('contains', 'Isrotel'));
-    //console.log(posts);
   }
+
+  public async searchHotelList(value: string) {
+    this.hotels = await DataStore.query(Hotel, (h) => h.hotel_name('contains', value)); //this is not good because it is case sensitive...
+  }
+
 
 }
